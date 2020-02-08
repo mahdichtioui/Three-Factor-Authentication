@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "683758098730",
+    "firebase_url": "https://three-factor-authentication.firebaseio.com",
+    "project_id": "three-factor-authentication",
+    "storage_bucket": "three-factor-authentication.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:683758098730:android:9c825831baae11ceede653",
+        "android_client_info": {
+          "package_name": "com.mpdam.threefactorsauthentication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "683758098730-8s5fhva8b0eckn65l5b4i02k7sh7ds43.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mpdam.threefactorsauthentication",
+            "certificate_hash": "75d3d2364a8b837ba70881461402351afbfb65a4"
+          }
+        },
+        {
+          "client_id": "683758098730-e66ksmbj6rokn4dud7ok16ero9u4fkvg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvgsAG6kTKu439rI6mjfVMp1LU578LJnQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "683758098730-e66ksmbj6rokn4dud7ok16ero9u4fkvg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
