@@ -42,4 +42,13 @@
         android:textColor="@color/textPrimary"
         android:textSize="16sp"/>
 
+    <Button
+        android:id="@+id/btn_sign_out"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sing Out"
+        android:background="@null"/>
+
 </LinearLayout>
