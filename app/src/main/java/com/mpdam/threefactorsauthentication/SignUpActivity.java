@@ -82,10 +82,8 @@ public class SignUpActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Toast.makeText(SignUpActivity.this, "Success.",
                                     Toast.LENGTH_SHORT).show();
-                             currentUser = mAuth.getCurrentUser();
-                            Intent intent = new Intent(SignUpActivity.this, PhoneAuthActivity.class);
-                            intent.putExtra("user", currentUser);
-                            startActivity(intent);
+
+                            startActivity(new Intent(SignUpActivity.this, PhoneAuthActivity.class));
                         } else {
                             Toast.makeText(SignUpActivity.this, "Authentication failed: " + task.getException().getMessage(),
                                     Toast.LENGTH_SHORT).show();

@@ -109,5 +109,13 @@
 
     </LinearLayout>
 
+    <Button
+        android:id="@+id/btn_resend_code"
+        android:layout_marginVertical="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:text="Resend Verification code" />
+
 
 </LinearLayout>
