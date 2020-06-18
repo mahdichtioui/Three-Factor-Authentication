@@ -1,5 +1,8 @@
 package com.mpdam.threefactorsauthentication;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -16,28 +19,17 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.util.concurrent.Executor;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.biometric.BiometricPrompt;
-
-public class MainActivity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity {
 
     private Button btnPassword;
     private Button btnCode;
     private EditText etEmail;
     private EditText etPwd;
+    private EditText etPwdConfirm;
     private EditText etCode;
-    private TextView tvSignUp;
-
-    private Executor executor;
-    private BiometricPrompt biometricPrompt;
-    private BiometricPrompt.PromptInfo promptInfo;
+    private TextView tvSignIn;
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
-
-    private String sentCode;
 
     @Override
     public void onStart() {
@@ -48,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_sign_up);
 
         whiteNotificationBar();
 
@@ -58,41 +50,46 @@ public class MainActivity extends AppCompatActivity {
 
         etEmail = findViewById(R.id.et_email);
         etPwd = findViewById(R.id.et_pwd);
+        etPwdConfirm = findViewById(R.id.et_pwd_confirm);
 
-        tvSignUp = findViewById(R.id.tv_sign_up);
+        tvSignIn = findViewById(R.id.tv_sign_in);
 
         btnPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                signIn();
+                signUp();
             }
         });
 
-        tvSignUp.setOnClickListener(new View.OnClickListener() {
+        tvSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MainActivity.this.startActivity(new Intent(MainActivity.this, SignUpActivity.class));
+                SignUpActivity.this.startActivity(new Intent(SignUpActivity.this, MainActivity.class));
             }
         });
 
     }
 
-    private void signIn(){
+    private void signUp(){
         String mail = etEmail.getText().toString();
         String pwd = etPwd.getText().toString();
-        mAuth.signInWithEmailAndPassword(mail, pwd)
+        String pwdConfirm = etPwdConfirm.getText().toString();
+
+        mAuth.createUserWithEmailAndPassword(mail, pwd)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(MainActivity.this, "Success.",
+                            Toast.makeText(SignUpActivity.this, "Success.",
                                     Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(MainActivity.this, PhoneAuthActivity.class));
+                             currentUser = mAuth.getCurrentUser();
+                            Intent intent = new Intent(SignUpActivity.this, PhoneAuthActivity.class);
+                            intent.putExtra("user", currentUser);
+                            startActivity(intent);
                         } else {
-                            Toast.makeText(MainActivity.this, "Authentication failed: " + task.getException().getMessage(),
+                            Toast.makeText(SignUpActivity.this, "Authentication failed: " + task.getException().getMessage(),
                                     Toast.LENGTH_SHORT).show();
                         }
-
                     }
                 });
     }
@@ -103,5 +100,4 @@ public class MainActivity extends AppCompatActivity {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
     }
-
 }
